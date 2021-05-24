@@ -2,6 +2,9 @@ package arvores;
 
 public class Arvore<T> {
 	private NoArvore<T> raiz;
+	private int inc = 1;
+	private static int maiorAltura = 0;
+    private static int menorAltura = 0;
 	
 	public Arvore() {
 		super();
@@ -37,4 +40,50 @@ public class Arvore<T> {
 			return this.raiz.pertence(procurado);
 		}
 	}
+	
+	public int getAltura() {
+		if (this.vazia()) {
+			return -1;
+		} else {
+			//Segue caso a raiz possua filho, caso contrário retorna zero
+			if (this.getRaiz().getFilho() != null) {
+				NoArvore<T> filho = this.getRaiz().getFilho();
+				return filho.getAlturaArvore(filho, inc);
+			}
+			return 0;
+		}
+	}
+	 
+	public int getNivel(T info) {
+		if (this.vazia()) {
+			return -1;
+		}
+        return raiz.alturaNo(info, 0);
+    }
+	
+	public boolean isBalanceada() {
+        if (this.vazia()) {
+            return false;
+        }
+        maiorAltura = getAltura();
+        menorAltura = getMenorAltura();
+
+        if (maiorAltura - 1 == menorAltura || maiorAltura == menorAltura) {
+            return true;
+        }
+        return false;
+    }
+	
+	public int getMenorAltura() {
+        if (this.vazia()) {
+            return -1;
+        } else {
+            //Segue caso a raiz possua filho, caso contrário retorna zero
+            if (this.getRaiz().getFilho() != null) {
+                NoArvore<T> filho = this.getRaiz().getFilho();
+                return filho.getMenorAlturaArvore(filho, inc);
+            }
+            return 0;
+        }
+    }
 }

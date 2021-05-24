@@ -7,8 +7,14 @@ public class TesteDaArvoreNAria {
 		NoArvore<Integer> n4 = new NoArvore<Integer>(4);
 		n4.inserirFilho(n10);
 		n4.inserirFilho(n9);
+		NoArvore<Integer> n14 = new NoArvore<Integer>(14);
+		NoArvore<Integer> n13 = new NoArvore<Integer>(13);
+		n13.inserirFilho(n14);
+		NoArvore<Integer> n12 = new NoArvore<Integer>(12);
+		n12.inserirFilho(n13);
 
 		NoArvore<Integer> n8 = new NoArvore<Integer>(8);
+		n8.inserirFilho(n12);
 		NoArvore<Integer> n3 = new NoArvore<Integer>(3);
 		n3.inserirFilho(n8);
 
@@ -28,9 +34,8 @@ public class TesteDaArvoreNAria {
 
 		Arvore<Integer> a = new Arvore<>();
 		a.setRaiz(n1);
-		System.out.println(a.toString());
-		System.out.println("250 (null) = "+a.pertence(250));
-		System.out.println("8 = "+a.pertence(8));
-		System.out.println("10 = "+a.pertence(10));
+		System.out.println("nivel = " + a.getNivel(n8.getInfo()));
+		System.out.println("Altura = " + a.getAltura());
+		System.out.println("Balanceada = " + a.isBalanceada() + " | Sendo " + a.getMenorAltura());
 	}
 }
