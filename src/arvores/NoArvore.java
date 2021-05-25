@@ -7,6 +7,8 @@ public class NoArvore<T> {
 	private int altura = 0;
 	private static int alturaNo = -1;
 	private int menorAltura = 10000;
+	private int qtdFolhas = 0;
+	private String impressao = "";
 
 	public NoArvore(T info) {
 		this.info = info;
@@ -108,6 +110,54 @@ public class NoArvore<T> {
         inc++;
         filho.alturaNo(info, inc);
     }
+    
+    public String imprimePosOrdem(NoArvore<T> no) {
+		boolean hasFilho = no.getFilho() != null;
+		boolean hasIrmao = no.getIrmao() != null;
+		
+		if (!hasFilho && !hasIrmao) {
+			return impressao += no.getInfo() + "; ";
+		}
+
+		if (hasFilho) {
+			imprimePosOrdem(no.getFilho());
+		}
+		
+		impressao += no.getInfo() + "; ";
+		
+		if (hasIrmao) {
+			imprimePosOrdem(no.getIrmao());
+		}
+		
+		return impressao;
+	}
+	
+	public int getQuantidadeDeNosFolha(NoArvore<T> no, int index) {
+		int indexFilho = index; 
+		
+		if (no.getFilho() != null) {
+			getQuantidadeDeNosFolha(no.getFilho(), indexFilho+1);
+	       
+		}else {
+	            if (no.getFilho() == null) {
+	                this.setQtdFolhas();
+	            }
+	        }
+		int indexIrmao = index;
+	        if (no.getIrmao() != null) {
+	        	getQuantidadeDeNosFolha(no.getIrmao(), indexIrmao);
+	        }
+
+	        return this.getQtdFolhas(); 
+	    }
+	
+	public void setQtdFolhas() {
+		this.qtdFolhas++;
+	}
+	
+	public int getQtdFolhas() {
+		return this.qtdFolhas;
+	}
 	
 	@Override
 	public String toString() {

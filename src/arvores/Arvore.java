@@ -86,4 +86,28 @@ public class Arvore<T> {
             return 0;
         }
     }
+	
+	public String imprimePosOrdem() {
+		if (this.vazia()) {
+			return "";
+		} else {
+			NoArvore<T> filho = this.getRaiz().getFilho();
+			if (filho != null) {
+				return this.getRaiz().imprimePosOrdem(filho) + this.raiz.getInfo() + ";";
+			}
+			return "" + getRaiz().getInfo() + ";";
+		}
+	}
+	
+	public int getQuantidadeDeNosFolha() {
+		if (this.vazia()) {
+            return -1;
+		}else {
+		  if (this.getRaiz().getFilho() != null) {
+			  NoArvore<T> filho = this.getRaiz().getFilho();
+			  return this.raiz.getQuantidadeDeNosFolha(filho,1);
+			  }
+		  return 0;
+		  }
+	  }
 }
